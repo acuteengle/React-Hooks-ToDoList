@@ -5,9 +5,9 @@ const ListItem = ({ task, onComplete=null, onDelete }) => {
         <li>
             <div>
                 <p>{task.name}</p>
-                <button type="submit" onClick={onDelete(task.id)}>Delete</button>
+                <button type="submit" onClick={() => onDelete(task.id)}>Delete</button>
                 {onComplete &&
-                    <button type="submit" onClick={onComplete(task.id)}>Complete</button>
+                    <button type="submit" onClick={() => onComplete(task.id)}>Complete</button>
                 }
             </div>
         </li>
