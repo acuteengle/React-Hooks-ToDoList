@@ -1,25 +1,39 @@
-import React from 'react';
-import ListItem from './ListItem';
+import React from "react";
+import ListItem from "./ListItem";
 
-const CompletedTaskList = ({ tasks, onComplete, onDelete }) => {
-    const toDoTasks = tasks.filter((t) => {
-        return !t.done
+const ToDoTaskList = ({ tasks, onComplete, onDelete, complete = false }) => {
+  const styles = {
+    flexContainer: {
+      display: "flex",
+      flexDirection: "column",
+    },
+  };
+  let tasksList;
+  if (complete) {
+    tasksList = tasks.filter((t) => {
+      return t.done;
     });
-    return (
-        <ul>
-            {toDoTasks.map((task) => {
-                return (
-                    <ListItem
-                        key={task.id}
-                        task={task}
-                        onComplete={onComplete}
-                        onDelete={onDelete}
-                    />
-                )
-            })
-            }
-        </ul>
-    )
-}
+  } else {
+    tasksList = tasks.filter((t) => {
+      return !t.done;
+    });
+  }
 
-export default CompletedTaskList;
+  return (
+    <div className={styles.flexContainer}>
+      {tasksList.map((task) => {
+        return (
+          <ListItem
+            key={task.id}
+            task={task}
+            onComplete={onComplete}
+            onDelete={onDelete}
+            complete={complete}
+          />
+        );
+      })}
+    </div>
+  );
+};
+
+export default ToDoTaskList;
